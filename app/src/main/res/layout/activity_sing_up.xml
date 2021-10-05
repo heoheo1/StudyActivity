@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back"
+    android:layout_gravity="center">
+
+    <EditText
+        android:id="@+id/edt_SignUpEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginLeft="84dp"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/button_corners2_1"
+        android:ems="13"
+        android:hint="아이디를 입력해주세요"
+        android:inputType="textPersonName"
+        android:padding="15dp"
+        android:textColor="@color/black"
+        android:textColorHint="#909090"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edt_SignUpPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginLeft="84dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/button_corners2_1"
+        android:ems="13"
+        android:hint="비밀번호를 입력해주세요"
+        android:inputType="textPassword"
+        android:padding="15dp"
+        android:textColor="@color/black"
+        android:textColorHint="#909090"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_SignUpEmail" />
+
+    <EditText
+        android:id="@+id/edt_SignUpPassword2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginLeft="84dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/button_corners2_1"
+        android:ems="13"
+        android:hint="비밀번호을 확인해주세요"
+        android:inputType="textPassword"
+        android:padding="15dp"
+        android:textColor="@color/black"
+        android:textColorHint="#909090"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_SignUpPassword" />
+
+    <Button
+        android:id="@+id/btn_SignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="124dp"
+        android:layout_marginLeft="124dp"
+        android:layout_marginTop="124dp"
+        android:background="@drawable/button_corners3"
+        android:text="회원가입 완료"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:backgroundTint="@android:color/transparent"
+        app:backgroundTintMode="add"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_SignUpPassword2" />
+</androidx.constraintlayout.widget.ConstraintLayout>
