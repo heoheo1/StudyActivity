@@ -87,7 +87,9 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
             }
-            if (!(cursorEmail.equals(email))) {
+            if(cursorEmail==null) {
+                Toast.makeText(LoginActivity.this, "회원가입을 해주세요.", Toast.LENGTH_SHORT).show();
+            }else if (!(cursorEmail.equals(email))) {
                 Toast.makeText(LoginActivity.this, "존재하지 않는 아이디 입니다.", Toast.LENGTH_SHORT).show();
             }
         });

@@ -20,16 +20,17 @@
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_ft"
+        android:id="@+id/btn_fb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@color/white"
+        android:layout_margin="8dp"
         app:backgroundTint="@color/white"
         android:src="@drawable/ic_baseline_add_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:pressedTranslationZ="20dp" />
+        app:pressedTranslationZ="24dp" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
