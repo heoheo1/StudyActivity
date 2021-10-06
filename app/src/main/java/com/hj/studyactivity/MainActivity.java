@@ -1,6 +1,7 @@
 package com.hj.studyactivity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -32,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
 
         itemArrayList =new ArrayList();
         itemArrayList.add(new Item("ㅇㅇ","내용 :ㅇㅇㅇ",uri));
+
+        MyAdapter adapter =new MyAdapter(itemArrayList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+
 
 
         btn_fb=findViewById(R.id.btn_fb);
