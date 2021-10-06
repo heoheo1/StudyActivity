@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -32,6 +33,8 @@ public class WriteActivity extends AppCompatActivity {
     ImageView imageView;
     String email;
     Uri selectedImageUri;
+    String  databaseName ="MemberDB";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,10 @@ public class WriteActivity extends AppCompatActivity {
         imageView=findViewById(R.id.imageView);
         Intent intent=getIntent();
         email =intent.getStringExtra("email");
+        Log.d("hhj", email);
+        DBHelper dbHelper =new DBHelper(this,databaseName,null,1,"member"+email);
+        db=dbHelper.getWritableDatabase();
+
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,9 +68,9 @@ public class WriteActivity extends AppCompatActivity {
                 contentValues.put("Image", String.valueOf(selectedImageUri));
                 contentValues.put("Title",title);
                 contentValues.put("Contents",contents);
-                Log.d("hhj", String.valueOf(selectedImageUri)+","+title+","+contents);
+                Log.d("hhj", String.valueOf(selectedImageUri)+","+title+","+contents+","+email);
                 db.insert("member"+email, null, contentValues); //테이블에 데이터를 생성
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class); //데이터를 생성후 Login 화면으로 이동
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class); //데이터를 생성후 Login 화면으로 이동
                 startActivity(intent);
                 finish();
 

@@ -73,8 +73,8 @@ public class LoginActivity extends AppCompatActivity {
                         db.execSQL("CREATE TABLE IF NOT EXISTS " + "member" + email + "(" //시작이 숫자로 되면안되서 member라고 임의로 넣어주었다dur
                                 + " id INTEGER PRIMARY KEY AUTOINCREMENT,image BLOB,title TEXT,contents TEXT)"); //테이블이 존재하지않으면 테이블 생성
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.putExtra("email",cursorEmail);
                         startActivity(intent);
-                        intent.putExtra("email",email);
                         finish();
                         Log.d("yousin", cursorEmail + "," + email);
                         break;

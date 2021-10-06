@@ -11,6 +11,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class MainActivity extends AppCompatActivity {
 
     FloatingActionButton btn_fb;
+    Intent intent;
 
 
     @Override
@@ -23,8 +24,10 @@ public class MainActivity extends AppCompatActivity {
         btn_fb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent =new Intent(getApplicationContext(),WriteActivity.class);
+                intent =getIntent();
+                String cursorEmail = intent.getStringExtra("email");
+                intent =new Intent(getApplicationContext(),WriteActivity.class);
+                intent.putExtra("email",cursorEmail);
                 startActivity(intent);
 
             }
