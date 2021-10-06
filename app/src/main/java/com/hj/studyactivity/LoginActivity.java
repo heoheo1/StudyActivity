@@ -74,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                                 + " id INTEGER PRIMARY KEY AUTOINCREMENT,image BLOB,contents TEXT)"); //테이블이 존재하지않으면 테이블 생성
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
+                        intent.putExtra("email",email);
                         finish();
                         Log.d("yousin", cursorEmail + "," + email);
                         break;
