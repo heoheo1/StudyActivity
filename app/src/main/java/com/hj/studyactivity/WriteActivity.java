@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.Inet4Address;
@@ -62,8 +64,8 @@ public class WriteActivity extends AppCompatActivity {
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
                 try {
-                    Uri selectdImageUri =data.getData();
-                    setImage(selectdImageUri);
+                    Uri selectedImageUri =data.getData();
+                    Glide.with(getApplicationContext()).load(selectedImageUri).into(imageView);
 
                 } catch (Exception e) {
                     e.printStackTrace();
