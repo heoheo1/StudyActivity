@@ -3,6 +3,7 @@ package com.hj.studyactivity;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -11,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.renderscript.ScriptGroup;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +30,8 @@ public class WriteActivity extends AppCompatActivity {
     Button btn_OK;
     SQLiteDatabase db;
     ImageView imageView;
+    String email;
+    Uri selectedImageUri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +40,8 @@ public class WriteActivity extends AppCompatActivity {
         edt_contents=findViewById(R.id.edt_contents);
         btn_OK=findViewById(R.id.btn_OK);
         imageView=findViewById(R.id.imageView);
+        Intent intent=getIntent();
+        email =intent.getStringExtra("email");
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,8 +57,17 @@ public class WriteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String title=edt_title.getText().toString();
                 String contents=edt_contents.getText().toString();
-                Intent intent=getIntent();
-                String email =intent.getStringExtra("email");
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("Image", String.valueOf(selectedImageUri));
+                contentValues.put("Title",title);
+                contentValues.put("Contents",contents);
+                Log.d("hhj", String.valueOf(selectedImageUri)+","+title+","+contents);
+                db.insert("member"+email, null, contentValues); //테이블에 데이터를 생성
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class); //데이터를 생성후 Login 화면으로 이동
+                startActivity(intent);
+                finish();
+
+
 
             }
         });
@@ -64,7 +79,8 @@ public class WriteActivity extends AppCompatActivity {
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
                 try {
-                    Uri selectedImageUri =data.getData();
+
+                    selectedImageUri =data.getData();
                     Glide.with(getApplicationContext()).load(selectedImageUri).into(imageView);
 
                 } catch (Exception e) {
