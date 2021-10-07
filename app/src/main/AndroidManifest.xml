@@ -10,24 +10,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyActivity">
         <activity
+            android:name=".IntroActivity"
+            android:exported="true" >
+            <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".SubjectActivity"
             android:exported="true" />
         <activity
             android:name=".PictureActivtiy"
             android:exported="true" />
         <activity android:name=".WriteActivity" />
-        <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".LoginActivity"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+
         <activity android:name=".SingUpActivity" />
         <activity android:name=".MainActivity" />
     </application>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE " />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE " />
 
 </manifest>
