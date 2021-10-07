@@ -5,7 +5,7 @@ import android.net.Uri;
 public class Item {
     String title;
     String contents;
-    Uri uri;
+    String uri;
 
     public String getTitle() {
         return title;
@@ -23,15 +23,15 @@ public class Item {
         this.contents = contents;
     }
 
-    public Uri getUri() {
+    public String getUri() {
         return uri;
     }
 
-    public void setUri(Uri uri) {
+    public void setUri(String uri) {
         this.uri = uri;
     }
 
-    public Item(String title, String contents, Uri uri) {
+    public Item(String title, String contents, String uri) {
         this.title = title;
         this.contents = contents;
         this.uri =uri;

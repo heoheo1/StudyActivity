@@ -1,5 +1,11 @@
 package com.hj.studyactivity;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,14 +15,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     ArrayList<Item> itemArrayList;
+    Context context;
 
-    public MyAdapter(ArrayList<Item> itemArrayList) {
+    public MyAdapter(Context context,ArrayList<Item> itemArrayList) {
         this.itemArrayList = itemArrayList;
+        this.context =context;
 
     }
 
@@ -33,7 +42,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.title.setText(itemArrayList.get(position).getTitle());
         holder.contents.setText(itemArrayList.get(position).getContents());
-        holder.imageView.setImageURI(itemArrayList.get(position).getUri());
+        if(itemArrayList.get(position).getUri()!=null) {
+            holder.imageView.setImageURI(Uri.parse(itemArrayList.get(position).getUri()));
+        }
+        int i =position;
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    Intent intent = new Intent(context, PictureActivtiy.class);
+                    intent.putExtra("uri", itemArrayList.get(i).getUri());
+                    context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -52,7 +72,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             super(itemView);
             this.title = itemView.findViewById(R.id.txt_card_title);
             this.contents = itemView.findViewById(R.id.txt_card_contents);
-            imageView = itemView.findViewById(R.id.imageView);
+            imageView = itemView.findViewById(R.id.card_image);
+
+
         }
     }
 }

@@ -2,13 +2,18 @@ package com.hj.studyactivity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,9 +30,11 @@ public class LoginActivity extends AppCompatActivity {
     String  table ="Membertbl";
     String password;
     String cursorEmail,cursorPasswod;
+    SharedPreferences sharedPreferences;
     int version = 1;
     String email;
     DBHelper databaseHelper;
+    long pressedTime =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +49,17 @@ public class LoginActivity extends AppCompatActivity {
         databaseHelper =new DBHelper(this,databaseName,null,version,table);
         db =databaseHelper.getWritableDatabase();
 
+
+        ActivityCompat.requestPermissions(this,new String[]{
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE
+        },0);
+
+
         text_SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent =new Intent(getApplicationContext(),SingUpActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
 
             }
@@ -71,12 +85,14 @@ public class LoginActivity extends AppCompatActivity {
                 if (cursorEmail.equals(email)) {
                     if (cursorPasswod.equals(password)) {
                         db.execSQL("CREATE TABLE IF NOT EXISTS " + "member" + email + "(" //시작이 숫자로 되면안되서 member라고 임의로 넣어주었다dur
-                                + " id INTEGER PRIMARY KEY AUTOINCREMENT,image BLOB,title TEXT,contents TEXT)"); //테이블이 존재하지않으면 테이블 생성
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        intent.putExtra("email",cursorEmail);
+                                + " id INTEGER PRIMARY KEY AUTOINCREMENT,image BLOB,title TEXT,contents TEXT,subject TEXT)"); //테이블이 존재하지않으면 테이블 생성
+                        Intent intent = new Intent(getApplicationContext(), SubjectActivity.class);
+                        sharedPreferences =getSharedPreferences("pref",MODE_PRIVATE);
+                        SharedPreferences.Editor editor= sharedPreferences.edit();
+                        editor.putString("email",cursorEmail);
+                        editor.commit();
                         startActivity(intent);
                         finish();
-                        Log.d("yousin", cursorEmail + "," + email);
                         break;
                     }
 
@@ -100,6 +116,26 @@ public class LoginActivity extends AppCompatActivity {
     protected void onDestroy() {
         databaseHelper.close();
         super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if ( pressedTime == 0 ) {
+            Toast.makeText(LoginActivity.this, " 한 번 더 누르면 종료됩니다." , Toast.LENGTH_LONG).show();
+            pressedTime = System.currentTimeMillis();
+        }
+        else {
+            int seconds = (int) (System.currentTimeMillis() - pressedTime);
+
+            if ( seconds > 2000 ) {
+                Toast.makeText(LoginActivity.this, " 한 번 더 누르면 종료됩니다." , Toast.LENGTH_LONG).show();
+                pressedTime = 0 ;
+            }
+            else {
+                ActivityCompat.finishAffinity(this);
+                System.exit(0);
+            }
+        }
     }
 
 

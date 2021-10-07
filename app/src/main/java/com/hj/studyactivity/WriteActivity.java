@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
@@ -31,9 +32,10 @@ public class WriteActivity extends AppCompatActivity {
     Button btn_OK;
     SQLiteDatabase db;
     ImageView imageView;
-    String email;
+    String spemail,spsubject;
     Uri selectedImageUri;
     String  databaseName ="MemberDB";
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +45,8 @@ public class WriteActivity extends AppCompatActivity {
         edt_contents=findViewById(R.id.edt_contents);
         btn_OK=findViewById(R.id.btn_OK);
         imageView=findViewById(R.id.imageView);
-        Intent intent=getIntent();
-        email =intent.getStringExtra("email");
-        Log.d("hhj", email);
-        DBHelper dbHelper =new DBHelper(this,databaseName,null,1,"member"+email);
+        DBHelper dbHelper =new DBHelper(this,databaseName,null,1,"member"+spemail);
         db=dbHelper.getWritableDatabase();
-
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,16 +62,20 @@ public class WriteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String title=edt_title.getText().toString();
                 String contents=edt_contents.getText().toString();
+                sharedPreferences = getSharedPreferences("pref", MODE_PRIVATE);
+                spemail = sharedPreferences.getString("email", "");
+                spsubject=sharedPreferences.getString("subject","");
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("Image", String.valueOf(selectedImageUri));
                 contentValues.put("Title",title);
                 contentValues.put("Contents",contents);
-                Log.d("hhj", String.valueOf(selectedImageUri)+","+title+","+contents+","+email);
-                db.insert("member"+email, null, contentValues); //테이블에 데이터를 생성
+                contentValues.put("Subject",spsubject);
+
+                db.insert("member"+spemail, null, contentValues); //테이블에 데이터를 생성
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class); //데이터를 생성후 Login 화면으로 이동
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
-
 
 
             }
@@ -99,13 +101,4 @@ public class WriteActivity extends AppCompatActivity {
         }
     }
 
-    private void setImage(Uri uri) {
-        try{
-            InputStream in = getContentResolver().openInputStream(uri);
-            Bitmap bitmap = BitmapFactory.decodeStream(in);
-            imageView.setImageBitmap(bitmap);
-        } catch (FileNotFoundException e){
-            e.printStackTrace();
-        }
-    }
 }

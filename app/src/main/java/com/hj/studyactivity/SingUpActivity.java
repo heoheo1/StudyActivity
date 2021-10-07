@@ -71,6 +71,7 @@ public class SingUpActivity extends AppCompatActivity {
                 contentValues.put("password", password);
                 db.insert(table, null, contentValues); //테이블에 데이터를 생성
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class); //데이터를 생성후 Login 화면으로 이동
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
 

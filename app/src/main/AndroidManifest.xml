@@ -5,11 +5,17 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="공존어플"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyActivity">
-        <activity android:name=".WriteActivity"></activity>
+        <activity
+            android:name=".SubjectActivity"
+            android:exported="true" />
+        <activity
+            android:name=".PictureActivtiy"
+            android:exported="true" />
+        <activity android:name=".WriteActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,5 +26,8 @@
         <activity android:name=".SingUpActivity" />
         <activity android:name=".MainActivity" />
     </application>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE " />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>

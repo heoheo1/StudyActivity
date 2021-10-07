@@ -20,7 +20,7 @@ class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) { //처음에 한번만 실행
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + table + "("
+        db.execSQL("CREATE TABLE IF NOT EXISTS " +table + "("
                 + " email TEXT PRIMARY KEY,password TEXT)"); //테이블이 존재하지않으면 테이블 생성
         Log.d("DbClassTableName",table);
     }
@@ -30,6 +30,12 @@ class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
 
+    }
+
+    @Override
+    public void onConfigure(SQLiteDatabase db) {
+        super.onConfigure(db);
+        db.disableWriteAheadLogging();
     }
 
 
