@@ -51,9 +51,13 @@
 
         </ScrollView>
 
-
-
-
+        <ImageView
+            android:id="@+id/img_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_article_24"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintLeft_toLeftOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

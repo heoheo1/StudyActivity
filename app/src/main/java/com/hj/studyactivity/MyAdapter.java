@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             public void onClick(View view) {
                     Intent intent = new Intent(context, PictureActivtiy.class);
                     intent.putExtra("uri", itemArrayList.get(i).getUri());
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
             }
         });
@@ -67,12 +69,26 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         TextView title;
         TextView contents;
         ImageView imageView;
+        ImageView img_comment;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             this.title = itemView.findViewById(R.id.txt_card_title);
             this.contents = itemView.findViewById(R.id.txt_card_contents);
             imageView = itemView.findViewById(R.id.card_image);
+            img_comment =itemView.findViewById(R.id.img_comment);
+
+            img_comment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent =new Intent(context,CommentActivity.class);
+                    int i =getAdapterPosition();
+                    intent.putExtra("id", i);
+                    Log.d("ddddd", i+"");
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
+            });
 
 
         }

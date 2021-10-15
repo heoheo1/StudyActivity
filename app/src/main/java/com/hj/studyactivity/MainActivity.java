@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
 
         Intent intent =new Intent(getApplicationContext(),SubjectActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 
 

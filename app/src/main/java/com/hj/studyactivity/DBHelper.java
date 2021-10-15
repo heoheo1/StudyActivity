@@ -16,7 +16,9 @@ class DBHelper extends SQLiteOpenHelper {
     public DBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version,String table) {
         super(context, name, factory, version);
         this.table=table;
+
     }
+    
 
     @Override
     public void onCreate(SQLiteDatabase db) { //처음에 한번만 실행

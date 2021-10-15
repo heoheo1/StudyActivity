@@ -34,6 +34,7 @@ public class IntroActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent intent =new Intent(IntroActivity.this,LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
                 onWindowFocusChanged(false);

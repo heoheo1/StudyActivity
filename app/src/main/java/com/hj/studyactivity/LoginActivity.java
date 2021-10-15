@@ -87,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                         db.execSQL("CREATE TABLE IF NOT EXISTS " + "member" + email + "(" //시작이 숫자로 되면안되서 member라고 임의로 넣어주었다dur
                                 + " id INTEGER PRIMARY KEY AUTOINCREMENT,image BLOB,title TEXT,contents TEXT,subject TEXT)"); //테이블이 존재하지않으면 테이블 생성
                         Intent intent = new Intent(getApplicationContext(), SubjectActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         sharedPreferences =getSharedPreferences("pref",MODE_PRIVATE);
                         SharedPreferences.Editor editor= sharedPreferences.edit();
                         editor.putString("email",cursorEmail);
