@@ -16,7 +16,9 @@
         android:padding="5dp"
         android:background="@drawable/button_corners2"
        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -68,8 +68,6 @@ public class SubjectActivity extends AppCompatActivity implements View.OnClickLi
                 subject="사탐";
                 subject(subject);
                 break;
-
-
         }
     }
 
