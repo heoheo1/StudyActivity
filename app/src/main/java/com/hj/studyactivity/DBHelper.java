@@ -13,6 +13,7 @@ import javax.security.auth.Destroyable;
 class DBHelper extends SQLiteOpenHelper {
     String table;
 
+
     public DBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version,String table) {
         super(context, name, factory, version);
         this.table=table;
@@ -40,6 +41,10 @@ class DBHelper extends SQLiteOpenHelper {
         db.disableWriteAheadLogging();
     }
 
-
-
+//    public void delete(String todo){
+//        String query = "DELETE FROM "+table+" WHERE todo = '"+todo+"'";
+//
+//        db.execSQL(query);
+//
+//    }
 }

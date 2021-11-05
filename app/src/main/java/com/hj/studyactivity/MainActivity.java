@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 intent =new Intent(getApplicationContext(),WriteActivity.class);
+                intent.putExtra("mode",1);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
 
